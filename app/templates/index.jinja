@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>FastAPI Lit App</title>
+
+    {% if environment == "dev" %}
+        <!-- HMR (serwer Vite) -->
+        <script type="module" src="http://localhost:5173/@vite/client"></script>
+        <script type="module" src="http://localhost:5173/src/main.ts"></script>
+    {% else %}
+        <!-- produkcja – czytamy manifest wygenerowany przez vite build -->
+        {% set entry = manifest['src/main.ts'] %}
+        <link rel="modulepreload" href="{{ url_for('static', path=entry.imports[0]) }}">
+        <script type="module" src="{{ url_for('static', path=entry.file) }}"></script>
+        {% for css in entry.css or [] %}
+            <link rel="stylesheet" href="{{ url_for('static', path=css) }}">
+        {% endfor %}
+    {% endif %}
+
+</head>
+<body>
+<!-- Osadzamy nasz komponent webowy (zostanie zdefiniowany w załączonym skrypcie) -->
+<my-component name="World"></my-component>
+<p>Environment: {{ environment }}</p>
+
+<!-- Główny plik frontendu - Vite automatycznie podmieni ten link na wygenerowany bundle -->
+<script type="module" src="./src/main.ts"></script>
+</body>
+</html>

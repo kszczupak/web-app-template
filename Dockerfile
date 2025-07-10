@@ -12,7 +12,7 @@ WORKDIR /app
 
 # Kopiowanie plików zależności frontendowych i backendowych
 COPY frontend/package.json frontend/package-lock.json ./frontend/
-COPY requirements.txt ./
+COPY app/requirements.txt ./
 
 # Instalacja zależności Pythona (we wspólnym środowisku)
 RUN pip install -r requirements.txt
@@ -38,7 +38,7 @@ COPY --from=builder /usr/local/bin/gunicorn /usr/local/bin/gunicorn
 
 # Kopiowanie kodu aplikacji i statycznych plików frontend (z buildera)
 COPY --from=builder /app/app /app/app
-COPY --from=builder /app/frontend/dist /app/app/static
+COPY --from=builder /app/templates/dist /app/app/static
 
 # Ustawienie domyślnego polecenia (Gunicorn z workerami Uvicorn dla produkcji)
 CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "--workers", "4", "--bind", "0.0.0.0:8000", "app.main:app"]

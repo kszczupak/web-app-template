@@ -1,6 +1,0 @@
-fastapi==0.95.2
-uvicorn[standard]==0.22.0
-gunicorn==20.1.0
-SQLAlchemy==2.0.15       # (przykładowo, jeśli używamy SQLAlchemy do DB)
-psycopg[binary,pool]   # Postgres driver
-python-dotenv==1.0.0     # (opcjonalnie, do wczytywania .env jeśli potrzeba)

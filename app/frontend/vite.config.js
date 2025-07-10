@@ -6,7 +6,8 @@ export default defineConfig({
   root: __dirname,
   build: {
     outDir: path.resolve(__dirname, "../app/static"),
-    emptyOutDir: true    // czyści katalog statyczny przed każdą kompilacją
+    emptyOutDir: true,    // czyści katalog statyczny przed każdą kompilacją
+    manifest: true                               // ← generuje .vite/manifest.json
   },
   server: {
     port: 5173,
