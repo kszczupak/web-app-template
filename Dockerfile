@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y curl gnupg && \
 WORKDIR /app
 
 # Kopiowanie plików zależności frontendowych i backendowych
-COPY frontend/package.json frontend/package-lock.json ./frontend/
+COPY app/frontend/package.json app/frontend/package-lock.json ./frontend/
 COPY app/requirements.txt ./
 
 # Instalacja zależności Pythona (we wspólnym środowisku)
@@ -21,7 +21,7 @@ RUN pip install -r requirements.txt
 RUN cd frontend && npm ci
 
 # Kopiowanie kodu źródłowego frontend i budowanie aplikacji frontendu
-COPY frontend/. ./frontend/
+COPY app/frontend/. ./frontend/
 # Budowanie projektu frontend (Vite) – wyjście trafi do app/static
 RUN cd frontend && npx vite build
 

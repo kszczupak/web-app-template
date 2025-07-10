@@ -5,6 +5,5 @@
 .gitignore
 .env
 node_modules/
-app/templates/node_modules/
 app/templates/dist/
 app/static/
