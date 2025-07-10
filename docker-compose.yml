@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: builder   # Używamy obrazu z Node (etap builder) dla środ. dev
+    ports:
+      - "8000:8000"     # FastAPI Uvicorn/Gunicorn
+      - "5173:5173"     # Vite dev server (HMR) - tylko w trybie dev
+    volumes:
+      - ./:/app         # Montujemy kod źródłowy do kontenera (dev)
+    environment:
+      # Zmienne środowiskowe aplikacji/DB (do konfiguracji bazy danych)
+      - DB_HOST=db
+      - DB_USER=devuser
+      - DB_PASSWORD=devpass
+      - DB_NAME=devdb
+    command: /bin/bash -c "uvicorn app.main:app --reload --host 0.0.0.0 --port 8000 & cd frontend && npm run dev"
+    # ^ Uruchomienie Uvicorn z reload + start serwera deweloperskiego Vite
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"   # opcjonalnie mapowanie na hosta
+    environment:
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=devpass
+      - POSTGRES_DB=devdb
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:

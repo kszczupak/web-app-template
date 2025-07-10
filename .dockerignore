@@ -1,0 +1,10 @@
+# Wykluczanie niepotrzebnych plików/folderów z kontekstu Dockera
+**/__pycache__/
+**/.pytest_cache/
+.git
+.gitignore
+.env
+node_modules/
+app/frontend/node_modules/
+app/frontend/dist/
+app/static/
