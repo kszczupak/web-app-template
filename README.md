@@ -23,4 +23,11 @@ Read more about this approach [here](https://www.lorenstew.art/blog/eta-htmx-lit
 
 Application is meant to be developed inside the provided *devcontainer*. This ensures that development and production environments have the same dependencies.
 
-To spin-up the dev container TBD
+To spin-up the dev container:
+- Clone this project from Github
+- Open Jetbrains Gateway or in Pycharm go `File->Remote Development`
+- Select `Connections->Dev Containers->New Dev Container->From Local Project` and provide the path to cloned `.devcontainer` file
+![create_devcontainer.png](docs/create_devcontainer.png)
+
+> [!NOTE]
+> This is a note
