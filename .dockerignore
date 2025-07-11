@@ -7,3 +7,5 @@
 node_modules/
 app/templates/dist/
 app/static/
+.venv
+venv
