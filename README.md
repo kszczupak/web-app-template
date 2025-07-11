@@ -24,10 +24,13 @@ Read more about this approach [here](https://www.lorenstew.art/blog/eta-htmx-lit
 Application is meant to be developed inside the provided *devcontainer*. This ensures that development and production environments have the same dependencies.
 
 To spin-up the dev container:
-- Clone this project from Github
+- Create a new project based on this template
+- Clone a new project from Github
 - Open Jetbrains Gateway or in Pycharm go `File->Remote Development`
 - Select `Connections->Dev Containers->New Dev Container->From Local Project` and provide the path to cloned `.devcontainer` file
 ![create_devcontainer.png](docs/create_devcontainer.png)
 
 > [!NOTE]
-> This is a note
+> You can also use `From VCS Project` option but be aware of [this ticket](https://youtrack.jetbrains.com/issue/IJPL-196106). In this mode, project will be cloned ONLY ONCE and then reused. You are risking that the devcontainer won't be created with the newest code if you are not managing the jetbrains docker volumes manually.
+
+- Select `Build Container and Continue`
