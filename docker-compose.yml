@@ -4,7 +4,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-      target: builder   # Używamy obrazu z Node (etap builder) dla środ. dev
+      target: devcontainer   # Używamy obrazu z Node (etap builder) dla środ. dev
     ports:
       - "8000:8000"     # FastAPI Uvicorn/Gunicorn
       - "5173:5173"     # Vite dev server (HMR) - tylko w trybie dev
