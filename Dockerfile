@@ -4,8 +4,7 @@ FROM python:3.11-slim AS base
 # Instalacja Node.js (dodanie repozytorium NodeSource i instalacja Node 18 LTS)
 RUN apt-get update && apt-get install -y curl gnupg && \
     curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs build-essential && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y nodejs build-essential
 
 # Ustawienie katalogu roboczego
 WORKDIR /app
@@ -20,11 +19,11 @@ RUN pip install -r requirements.txt
 # Instalacja zależności Node (frontend)
 RUN cd frontend && npm ci
 
-FROM base as devcontainer
+FROM base AS devcontainer
 # Additional dependencies needed for development in devcontainer
-RUN apt install git
+RUN apt install -y git
 
-FROM base as builder
+FROM base AS builder
 
 # Kopiowanie kodu źródłowego frontend i budowanie aplikacji frontendu
 COPY app/frontend/. ./frontend/
