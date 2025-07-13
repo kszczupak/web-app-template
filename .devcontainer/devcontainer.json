@@ -2,8 +2,13 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose
 {
   "name": "FastAPI-Lit Dev",
-  "dockerComposeFile": "../docker-compose.yml",
-  "service": "app",
+  build: {
+    "dockerfile": "../Dockerfile",
+    context: "..",
+    target: "devcontainer"
+  },
+//  "dockerComposeFile": "../docker-compose.yml",
+//  "service": "app",
   "workspaceFolder": "/app",
   // Features to add to the dev container. More info: https://containers.dev/features.
   // Features don't work with multistage builds! See: https://youtrack.jetbrains.com/issue/IJPL-182853/Dev-Container-build-fails-with-Docker-multistage-build-and-dev-container-features
@@ -29,7 +34,7 @@
     "jetbrains": {
       "backend": "IntelliJ"
     }
-  },
+  }
   // Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "devcontainer"
 }

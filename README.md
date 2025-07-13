@@ -34,3 +34,9 @@ To spin-up the dev container:
 > You can also use `From VCS Project` option but be aware of [this ticket](https://youtrack.jetbrains.com/issue/IJPL-196106). In this mode, project will be cloned ONLY ONCE and then reused. You are risking that the devcontainer won't be created with the newest code if you are not managing the jetbrains docker volumes manually.
 
 - Select `Build Container and Continue`
+
+## ToDo
+
+- `docker-compose` shall contain only production settings - deployment from the image. `devcontainer` file(s) are build based on the Dockerfile, not `docker-compose`. `.env` file is shared - is this possible?
+  - Seems like `.env` sharing is not needed - in `devcontainer`, it will be created during development (same as for local development); for `production`/`staging` env variables will be provided from the deployment pipeline
+  - 
