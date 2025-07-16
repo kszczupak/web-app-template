@@ -1,5 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Full app" type="CompoundRunConfigurationType">
+    <toRun name="Db &amp; Redis" type="docker-deploy" />
     <toRun name="Backend" type="Python.FastAPI" />
     <toRun name="Frontend" type="js.build_tools.npm" />
     <method v="2" />

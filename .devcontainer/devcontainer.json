@@ -30,9 +30,17 @@
   // "postCreateCommand": "cat /etc/os-release",
 
   // Configure tool-specific properties.
+
+  // To find a plugin’s ID, open its JetBrains Marketplace page and look in
+  // the “Additional Information” panel.
+  //   e.g. https://plugins.jetbrains.com/plugin/7808-terraform-and-hcl
+
   "customizations": {
     "jetbrains": {
-      "backend": "IntelliJ"
+      "backend": "Pycharm",
+      "plugins": [
+        "https://plugins.jetbrains.com/plugin/22282-jetbrains-ai-assistant"
+      ]
     }
   }
   // Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
