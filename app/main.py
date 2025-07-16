@@ -10,6 +10,7 @@ from app.config import Environment
 from app.config import config
 from app.dependencies import templates
 from app.routers import json_api
+from app.routers import chart_data
 
 app = FastAPI()
 
@@ -23,6 +24,7 @@ config.static_dir.mkdir(exist_ok=True)
 app.mount("/static", StaticFiles(directory=config.static_dir), name="static")
 
 app.include_router(json_api.router)
+app.include_router(chart_data.router)
 
 @app.get("/", response_class=HTMLResponse)
 def homepage(request: Request):
