@@ -1,5 +1,7 @@
 services:
   app:
+    # This container is not really needed in development - it should reference only the docker image for
+    # staging/production environments.
     build:
       context: ./
       dockerfile: Dockerfile
@@ -28,6 +30,12 @@ services:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_DATABASE}
+    healthcheck: # <<< nadpisujemy domyślny
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
     volumes:
       - db-data:/var/lib/postgresql/data
 

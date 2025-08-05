@@ -45,5 +45,7 @@ COPY --from=builder /usr/local/bin/gunicorn /usr/local/bin/gunicorn
 COPY --from=builder /app/app /app/app
 COPY --from=builder /app/templates/dist /app/app/static
 
+# Will also need to run the db migration here!
+
 # Ustawienie domyślnego polecenia (Gunicorn z workerami Uvicorn dla produkcji)
 CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "--workers", "4", "--bind", "0.0.0.0:8000", "app.main:app"]
