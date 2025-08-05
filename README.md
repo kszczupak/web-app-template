@@ -89,7 +89,7 @@ Setups the `Vite` development HMR server.
 - run configuration selects `dev` command, defined in the `package.json`
 
   ![frontend_run_configuration](docs/frontend_run_configuration_main.png)
-- Pycharm also spins up browser (Chrome) + `Frontend Javascript` run configuration. This way Pycharm is able to allow 
+- Pycharm also spins up browser (Chrome) + `Frontend Javascript` run configuration. This way Pycharm is able to allow
   debugging the `JavaScript` code inside the IDE.
 
   ![frontend_run_configuration_browser](docs/frontend_run_configuration_browser.png)
@@ -119,10 +119,39 @@ How can we address it? TBD
 
 ## Handling the database
 
+Project uses `SqlAlchemy` as a main ORM. In addition, it uses `Alembic` to perform automatic database migrations.
+
+To set up `Alembic` following customizations were needed:
+
+- in `alembic/env.py` we are overwriting static url to the database, defined in `alembic.ini` file, to the value created
+  in `config`, based on the content of `.env` file.
+- in `alembic/env.py` we are pointing to `Base` class for our table models. This will allow automatically creating the
+  migration revisions.
+
+To perform migration (move the database to the newest state defined by the migration file):
+
+```commandline
+alembic upgrade head
+```
+
+To create a migration file (create `Python` script that will perform SQL operations to reflect the current state of data
+models):
+
+```commandline
+alembic revision --autogenerate -m "migration message"
+```
+
+To be decided:
+
+- when to perform the migrations during development? Maybe create a bash script and run configuration based on it. This
+  run configuration can be added to `Before launch` of `Backend` run configuration.
+- when to perform the migrations on a production environment? As a *fake container*, that is executed before the app
+  actually starts? Airflow does something similar.
+
 ## ToDo
 
 - `docker-compose` shall contain only production settings - deployment from the image. `devcontainer` file(s) are build
   based on the Dockerfile, not `docker-compose`. `.env` file is shared - is this possible?
-    - Seems like `.env` sharing is not needed - in `devcontainer`, it will be created during development (same as for
-      local development); for `production`/`staging` env variables will be provided from the deployment pipeline
-    - 
+- remove devcontainer dependencies
+- add datapoints to db
+- create chart web component

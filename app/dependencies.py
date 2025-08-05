@@ -15,10 +15,8 @@ _engine = create_engine(url=str(config.sqlalchemy_database_uri))
 _Session = sessionmaker(bind=_engine)
 
 
-Base = declarative_base()
-
 # Create database tables on startup
-Base.metadata.create_all(bind=_engine)
+# Base.metadata.create_all(bind=_engine)
 
 def get_session():
     with _Session() as session:
