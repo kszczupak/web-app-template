@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 2rem;
+}
+h1 {
+    color: #333;
+}
+form {
+    margin: 1rem 0;
+}
+ul {
+    padding: 0;
+    list-style: none;
+}
+ul li {
+    padding: 4px 0;
+}

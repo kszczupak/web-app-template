@@ -4,6 +4,8 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>FastAPI Lit App</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <link rel="stylesheet" href="/static/styles.css"/>
 
     {% if environment == "dev" %}
         <!-- HMR (serwer Vite) -->
@@ -21,11 +23,26 @@
 
 </head>
 <body>
-<!-- Osadzamy nasz komponent webowy (zostanie zdefiniowany w załączonym skrypcie) -->
-<my-component name="World"></my-component>
-<p>Environment: {{ environment }}</p>
+<h1>Witamy w przykładowej aplikacji</h1>
+<p>Ta strona demonstruje użycie <strong>HTMX</strong> i komponentu <strong>Lit</strong> w aplikacji
+    z oddzielnym frontendem i backendem.</p>
 
-<!-- Główny plik frontendu - Vite automatycznie podmieni ten link na wygenerowany bundle -->
-<script type="module" src="./src/main.ts"></script>
+<!-- Form to add a new data point (handled via HTMX) -->
+<h2>Dodaj nowy punkt danych</h2>
+<form hx-post="/data/add" hx-target="#data-list-container" hx-swap="innerHTML">
+    <input type="number" step="any" name="value" placeholder="Wartość" required>
+    <button type="submit">Dodaj</button>
+</form>
+
+<!-- Container for data list (loaded dynamically via HTMX) -->
+<div id="data-list-container" hx-get="/data/list" hx-trigger="load" hx-swap="innerHTML">
+    <!-- Początkowo pusty; zawartość załaduje się dynamicznie -->
+</div>
+
+<hr>
+<p>Komponent web (<code>&lt;linked-charts&gt;</code>) poniżej zawiera dwa wykresy Chart.js.
+    Spróbuj powiększyć (zoom) zakres pierwszego wykresu – drugi wykres automatycznie dostosuje swój zakres.</p>
+<!-- Our custom Lit component with two linked charts -->
+<linked-charts></linked-charts>
 </body>
 </html>

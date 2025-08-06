@@ -6,4 +6,4 @@ class DataPointSchema(BaseModel):
     timestamp: datetime
     value: float
     class Config:
-        orm_mode = True
+        from_attributes = True

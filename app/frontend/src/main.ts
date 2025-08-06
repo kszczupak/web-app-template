@@ -1,5 +1,7 @@
-// Import definicji naszego komponentu (rejestruje <my-component>)
+/*
+Main entry point for the frontend custom components - it registers the components by importing them here.
+ */
 import './components/MyComponent';
+import './components/LinkedChart';
 
-// (Opcjonalnie) dowolna logika startowa aplikacji frontend:
 console.log("Frontend initialized");

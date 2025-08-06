@@ -35,7 +35,7 @@ router = APIRouter(prefix="/data")
 def get_data_list(request: Request, db: DatabaseSession):
     """Return HTML list of data points for HTMX partial update."""
     items = db.query(DataPoint).order_by(DataPoint.timestamp.desc()).all()
-    return templates.TemplateResponse("data_list.html", {"request": request, "items": items})
+    return templates.TemplateResponse("data_list.jinja", {"request": request, "items": items})
 
 @router.post("/add", response_class=HTMLResponse)
 def add_data(request: Request, db: DatabaseSession, value: float = Form(...)):
@@ -46,7 +46,7 @@ def add_data(request: Request, db: DatabaseSession, value: float = Form(...)):
     db.refresh(new_dp)
     # Return updated list of data points as HTML
     items = db.query(DataPoint).order_by(DataPoint.timestamp.desc()).all()
-    return templates.TemplateResponse("data_list.html", {"request": request, "items": items})
+    return templates.TemplateResponse("data_list.jinja", {"request": request, "items": items})
 
 @router.get("/", response_model=list[DataPointSchema])
 def get_data_api(db: DatabaseSession):

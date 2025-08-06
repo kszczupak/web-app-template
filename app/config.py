@@ -12,6 +12,7 @@ class Environment(StrEnum):
     DEV = "dev"
     PROD = "prod"
 
+
 class Config(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env")
     environment: Environment

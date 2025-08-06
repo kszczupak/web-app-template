@@ -1,0 +1,9 @@
+{% if items %}
+    <ul id="data-list">
+        {% for dp in items %}
+            <li>{{ dp.timestamp.strftime("%Y-%m-%d %H:%M:%S") }}: {{ dp.value }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p><em>No data points available.</em></p>
+{% endif %}
