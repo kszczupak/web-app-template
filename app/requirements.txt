@@ -1,9 +1,0 @@
-fastapi
-uvicorn[standard]
-gunicorn
-SQLAlchemy       # (przykładowo, jeśli używamy SQLAlchemy do DB)
-psycopg[binary,pool]   # Postgres driver
-python-dotenv     # (opcjonalnie, do wczytywania .env jeśli potrzeba)
-pydantic-settings
-jinja2
-alembic

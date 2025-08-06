@@ -11,7 +11,7 @@ WORKDIR /app
 
 # Kopiowanie plików zależności frontendowych i backendowych
 COPY app/frontend/package.json app/frontend/package-lock.json ./frontend/
-COPY app/requirements.txt ./
+COPY requirements.txt ./
 
 # Instalacja zależności Pythona (we wspólnym środowisku)
 RUN pip install -r requirements.txt
